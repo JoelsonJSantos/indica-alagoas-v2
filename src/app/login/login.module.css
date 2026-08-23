@@ -1,0 +1,468 @@
+.page {
+  display: grid;
+
+  min-height:
+    calc(100vh - 150px);
+
+  place-items: center;
+
+  padding: 48px 20px;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgb(22 119 200 / 8%),
+      transparent 34rem
+    ),
+    #f5f8fb;
+}
+
+.card {
+  width:
+    min(440px, 100%);
+
+  padding: 34px;
+
+  border:
+    1px solid #dce5ed;
+
+  border-radius: 20px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 24px 70px
+    rgb(15 23 42 / 10%);
+}
+
+.brandIcon {
+  display: grid;
+
+  width: 54px;
+  height: 54px;
+
+  margin-bottom: 22px;
+
+  place-items: center;
+
+  border-radius: 16px;
+
+  background:
+    rgb(22 163 106 / 10%);
+
+  color: #16a36a;
+}
+
+.heading {
+  margin-bottom: 28px;
+}
+
+.heading > span {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #16a36a;
+
+  font-size: 12px;
+  font-weight: 750;
+
+  text-transform: uppercase;
+
+  letter-spacing:
+    0.06em;
+}
+
+.heading h1 {
+  margin: 0;
+
+  color: #172033;
+
+  font-size:
+    clamp(
+      25px,
+      4vw,
+      32px
+    );
+
+  line-height: 1.1;
+
+  letter-spacing:
+    -0.035em;
+}
+
+.heading p {
+  margin:
+    12px 0 0;
+
+  color: #667085;
+
+  font-size: 13px;
+
+  line-height: 1.65;
+}
+
+.form {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+.field {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.field label {
+  color: #172033;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.inputWrapper {
+  position: relative;
+
+  display: flex;
+
+  min-height: 48px;
+
+  align-items: center;
+
+  border:
+    1px solid #dce5ed;
+
+  border-radius: 11px;
+
+  background: #f8fafc;
+
+  color: #667085;
+
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease;
+}
+
+.inputWrapper:focus-within {
+  border-color: #1677c8;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 0 0 3px
+    rgb(22 119 200 / 10%);
+}
+
+.inputWrapper > svg {
+  flex: 0 0 auto;
+
+  margin-left: 14px;
+}
+
+.inputWrapper input {
+  width: 100%;
+  min-width: 0;
+  height: 46px;
+
+  padding:
+    0 14px;
+
+  border: 0;
+
+  outline: 0;
+
+  background:
+    transparent;
+
+  color: #172033;
+
+  font-size: 13px;
+}
+
+.inputWrapper input::placeholder {
+  color: #98a2b3;
+}
+
+.passwordToggle {
+  display: grid;
+
+  width: 42px;
+  height: 42px;
+
+  flex: 0 0 42px;
+
+  place-items: center;
+
+  margin-right: 3px;
+
+  border: 0;
+
+  border-radius: 8px;
+
+  background:
+    transparent;
+
+  color: #667085;
+
+  cursor: pointer;
+
+  transition:
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+.passwordToggle:hover {
+  background:
+    rgb(22 119 200 / 7%);
+
+  color: #1677c8;
+}
+
+.errorMessage {
+  padding:
+    10px 12px;
+
+  border:
+    1px solid
+    rgb(220 38 38 / 22%);
+
+  border-radius: 9px;
+
+  background:
+    rgb(220 38 38 / 6%);
+
+  color: #b42318;
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+.submitButton {
+  display: flex;
+
+  min-height: 48px;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  margin-top: 2px;
+
+  border: 1px solid #1677c8;
+
+  border-radius: 11px;
+
+  background: #1677c8;
+
+  color: #ffffff;
+
+  font: inherit;
+
+  font-size: 13px;
+  font-weight: 750;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 9px 24px
+    rgb(22 119 200 / 20%);
+
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    opacity 160ms ease;
+}
+
+.submitButton:hover:not(
+    :disabled
+  ) {
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 13px 30px
+    rgb(22 119 200 / 28%);
+}
+
+.submitButton:active:not(
+    :disabled
+  ) {
+  transform:
+    scale(0.98);
+}
+
+.submitButton:disabled {
+  opacity: 0.65;
+
+  cursor: default;
+}
+
+.spinner {
+  animation:
+    spin 800ms linear
+    infinite;
+}
+
+.securityNote {
+  margin:
+    22px 0 0;
+
+  color: #98a2b3;
+
+  font-size: 11px;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   DARK
+========================================================= */
+
+:global(
+    html[data-theme="dark"]
+  )
+  .page {
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgb(22 119 200 / 10%),
+      transparent 34rem
+    ),
+    #061521;
+}
+
+:global(
+    html[data-theme="dark"]
+  )
+  .card {
+  border-color: #244258;
+
+  background: #0a2232;
+
+  box-shadow:
+    0 26px 80px
+    rgb(0 0 0 / 32%);
+}
+
+:global(
+    html[data-theme="dark"]
+  )
+  .heading h1,
+:global(
+    html[data-theme="dark"]
+  )
+  .field label {
+  color: #f6f9fc;
+}
+
+:global(
+    html[data-theme="dark"]
+  )
+  .heading p {
+  color: #a7b6c2;
+}
+
+:global(
+    html[data-theme="dark"]
+  )
+  .inputWrapper {
+  border-color: #29485d;
+
+  background: #081c2a;
+
+  color: #8da3b3;
+}
+
+:global(
+    html[data-theme="dark"]
+  )
+  .inputWrapper:focus-within {
+  border-color: #2387dc;
+
+  background: #0a2232;
+
+  box-shadow:
+    0 0 0 3px
+    rgb(35 135 220 / 12%);
+}
+
+:global(
+    html[data-theme="dark"]
+  )
+  .inputWrapper input {
+  color: #f6f9fc;
+}
+
+:global(
+    html[data-theme="dark"]
+  )
+  .inputWrapper input::placeholder {
+  color: #6f8494;
+}
+
+:global(
+    html[data-theme="dark"]
+  )
+  .passwordToggle {
+  color: #8da3b3;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (
+  max-width: 520px
+) {
+  .page {
+    min-height:
+      calc(
+        100vh - 130px
+      );
+
+    padding:
+      26px 14px;
+  }
+
+  .card {
+    padding:
+      26px 20px;
+
+    border-radius: 16px;
+  }
+
+  .brandIcon {
+    width: 48px;
+    height: 48px;
+
+    margin-bottom: 18px;
+
+    border-radius: 14px;
+  }
+
+  .heading {
+    margin-bottom: 23px;
+  }
+
+  .heading h1 {
+    font-size: 25px;
+  }
+}
+
+
+@keyframes spin {
+  to {
+    transform:
+      rotate(360deg);
+  }
+}

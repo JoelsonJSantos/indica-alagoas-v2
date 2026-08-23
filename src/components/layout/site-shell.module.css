@@ -327,6 +327,128 @@
 }
 
 /* =========================================================
+   LOGOUT DO HEADER
+========================================================= */
+
+.headerLogoutForm {
+  margin: 0;
+}
+
+.headerLogoutButton {
+  display: flex;
+
+  min-height: 40px;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 0 15px;
+
+  border:
+    1px solid #dce5ed;
+
+  border-radius: 9px;
+
+  background: transparent;
+
+  color: #172033;
+
+  font: inherit;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 160ms ease,
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.headerLogoutButton:hover {
+  transform:
+    translateY(-2px);
+
+  border-color:
+    rgb(239 68 68 / 55%);
+
+  background:
+    rgb(239 68 68 / 6%);
+
+  color: #dc2626;
+
+  box-shadow:
+    0 9px 24px
+    rgb(239 68 68 / 8%);
+}
+
+.headerLogoutButton:active {
+  transform:
+    scale(0.97);
+}
+
+
+/* =========================================================
+   LOGOUT MOBILE
+========================================================= */
+
+.mobileLogoutForm {
+  width: 100%;
+
+  margin: 0;
+}
+
+.mobileLogoutButton {
+  display: flex;
+
+  width: 100%;
+  min-height: 40px;
+
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 0 12px;
+
+  border: 0;
+
+  border-radius: 9px;
+
+  background: transparent;
+
+  color: #dc2626;
+
+  font: inherit;
+
+  font-size: 13px;
+  font-weight: 650;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    transform 150ms ease,
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+.mobileLogoutButton:hover {
+  background:
+    rgb(239 68 68 / 7%);
+
+  color: #b91c1c;
+
+  transform:
+    translateX(2px);
+}
+
+/* =========================================================
    FOOTER
 ========================================================= */
 
@@ -565,6 +687,45 @@
   box-shadow: 0 10px 30px rgb(22 119 200 / 28%);
 }
 
+:global(
+    html[data-theme="dark"]
+  )
+  .headerLogoutButton {
+  border-color: #274459;
+
+  color: #f6f9fc;
+}
+
+:global(
+    html[data-theme="dark"]
+  )
+  .headerLogoutButton:hover {
+  border-color:
+    rgb(248 113 113 / 55%);
+
+  background:
+    rgb(239 68 68 / 8%);
+
+  color: #f87171;
+}
+
+:global(
+    html[data-theme="dark"]
+  )
+  .mobileLogoutButton {
+  color: #f87171;
+}
+
+:global(
+    html[data-theme="dark"]
+  )
+  .mobileLogoutButton:hover {
+  background:
+    rgb(239 68 68 / 9%);
+
+  color: #fca5a5;
+}
+
 /* =========================================================
    MOBILE
 ========================================================= */
@@ -611,9 +772,10 @@
 
   .desktopNav,
   .panelButton,
-  .loginButton {
-    display: none;
-  }
+  .loginButton,
+  .headerLogoutForm {
+   display: none;
+}
 
   .headerActions {
     flex: 0 0 auto;

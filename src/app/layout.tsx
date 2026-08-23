@@ -1,6 +1,14 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Geist, Geist_Mono } from "next/font/google";
+
+import {
+  Geist,
+  Geist_Mono,
+} from "next/font/google";
+
+import { SiteFooter } from "@/components/layout/site-footer";
+import { SiteHeader } from "@/components/layout/site-header";
+
 import "./globals.css";
 
 const geistSans = Geist({
@@ -15,8 +23,26 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Indica Alagoas",
-  description: "Encontre profissionais e serviços em Alagoas.",
+
+  description:
+    "Encontre profissionais e serviços em Alagoas.",
 };
+
+const themeScript = `
+(function () {
+  try {
+    var saved = localStorage.getItem("indica-alagoas-theme");
+
+    var theme = saved || (
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light"
+    );
+
+    document.documentElement.dataset.theme = theme;
+  } catch (_) {}
+})();
+`;
 
 export default function RootLayout({
   children,
@@ -26,9 +52,24 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
+      className={`${geistSans.variable} ${geistMono.variable}`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: themeScript,
+          }}
+        />
+      </head>
+
+      <body>
+        <SiteHeader />
+
+        {children}
+
+        <SiteFooter />
+      </body>
     </html>
   );
 }

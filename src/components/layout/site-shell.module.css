@@ -7,6 +7,8 @@
   z-index: 90;
   top: 0;
 
+  overflow: visible;
+
   border-bottom: 1px solid #e1e8ef;
 
   background: rgb(255 255 255 / 92%);
@@ -16,6 +18,9 @@
 }
 
 .headerInner {
+  position: relative;
+  z-index: 102;
+
   display: flex;
 
   width: min(1180px, calc(100% - 32px));
@@ -36,6 +41,8 @@
 .brand {
   display: flex;
 
+  min-width: 0;
+
   align-items: center;
 
   gap: 9px;
@@ -50,6 +57,8 @@
 
   width: 38px;
   height: 38px;
+
+  flex: 0 0 38px;
 
   place-items: center;
 
@@ -69,12 +78,14 @@
 
   background: #1677c8;
 
-  box-shadow:
-    0 10px 24px rgb(22 119 200 / 22%);
+  box-shadow: 0 10px 24px rgb(22 119 200 / 22%);
 }
 
 .brand > span:last-child {
   display: flex;
+
+  min-width: 0;
+
   flex-direction: column;
 }
 
@@ -99,7 +110,7 @@
 }
 
 /* =========================================================
-   NAVBAR
+   NAVBAR DESKTOP
 ========================================================= */
 
 .desktopNav {
@@ -174,6 +185,8 @@
   width: 40px;
   height: 40px;
 
+  flex: 0 0 40px;
+
   place-items: center;
 
   border: 1px solid #dce5ed;
@@ -198,12 +211,9 @@
 
   place-items: center;
 
-  transition:
-    transform 180ms ease,
-    opacity 180ms ease;
+  transition: transform 180ms ease;
 }
 
-/* Light: mostra lua */
 .themeMoon {
   display: grid;
 }
@@ -212,7 +222,6 @@
   display: none;
 }
 
-/* Dark: mostra sol */
 :global(html[data-theme="dark"]) .themeMoon {
   display: none;
 }
@@ -234,8 +243,7 @@
 
   background: rgb(22 163 106 / 7%);
 
-  box-shadow:
-    0 8px 22px rgb(15 23 42 / 8%);
+  box-shadow: 0 8px 22px rgb(15 23 42 / 8%);
 }
 
 .iconButton:active,
@@ -283,8 +291,7 @@
 
   background: rgb(22 119 200 / 6%);
 
-  box-shadow:
-    0 9px 24px rgb(22 119 200 / 10%);
+  box-shadow: 0 9px 24px rgb(22 119 200 / 10%);
 }
 
 .panelButton:active {
@@ -306,8 +313,7 @@
 
   background: #1677c8;
 
-  box-shadow:
-    0 10px 28px rgb(22 119 200 / 24%);
+  box-shadow: 0 10px 28px rgb(22 119 200 / 24%);
 }
 
 .loginButton:active {
@@ -315,7 +321,8 @@
 }
 
 .mobileMenuButton,
-.mobileNav {
+.mobileNav,
+.mobileBackdrop {
   display: none;
 }
 
@@ -492,13 +499,14 @@
 .panelButton:focus-visible,
 .loginButton:focus-visible,
 .footerColumn a:focus-visible,
-.footerSocials a:focus-visible {
+.footerSocials a:focus-visible,
+.mobileNav a:focus-visible {
   outline: 3px solid rgb(22 119 200 / 28%);
   outline-offset: 3px;
 }
 
 /* =========================================================
-   DARK
+   DARK - HEADER
 ========================================================= */
 
 :global(html[data-theme="dark"]) .header {
@@ -532,8 +540,7 @@
 
   background: rgb(34 199 122 / 8%);
 
-  box-shadow:
-    0 8px 24px rgb(0 0 0 / 18%);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 18%);
 }
 
 :global(html[data-theme="dark"]) .panelButton:hover {
@@ -541,8 +548,7 @@
 
   background: rgb(38 147 255 / 8%);
 
-  box-shadow:
-    0 9px 26px rgb(38 147 255 / 12%);
+  box-shadow: 0 9px 26px rgb(38 147 255 / 12%);
 }
 
 :global(html[data-theme="dark"]) .loginButton {
@@ -556,8 +562,7 @@
 
   background: #1677c8;
 
-  box-shadow:
-    0 10px 30px rgb(22 119 200 / 28%);
+  box-shadow: 0 10px 30px rgb(22 119 200 / 28%);
 }
 
 /* =========================================================
@@ -565,10 +570,28 @@
 ========================================================= */
 
 @media (max-width: 760px) {
+  .header {
+    overflow: visible;
+  }
+
   .headerInner {
     width: calc(100% - 20px);
-
     min-height: 64px;
+
+    gap: 10px;
+  }
+
+  .brand {
+    flex: 1;
+
+    min-width: 0;
+  }
+
+  .brandMark {
+    width: 36px;
+    height: 36px;
+
+    flex: 0 0 36px;
   }
 
   .brand strong {
@@ -576,7 +599,14 @@
   }
 
   .brand small {
+    max-width: 170px;
+
+    overflow: hidden;
+
     font-size: 8px;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .desktopNav,
@@ -585,49 +615,184 @@
     display: none;
   }
 
+  .headerActions {
+    flex: 0 0 auto;
+
+    margin-left: auto;
+
+    gap: 7px;
+  }
+
+  .iconButton,
+  .mobileMenuButton {
+    width: 40px;
+    height: 40px;
+
+    flex: 0 0 40px;
+  }
+
   .mobileMenuButton {
     display: grid;
   }
 
+  /* =======================================================
+     OVERLAY
+  ======================================================= */
+
+  .mobileBackdrop {
+    position: fixed;
+
+    z-index: 80;
+
+    inset: 64px 0 0;
+
+    display: block;
+
+    width: 100%;
+    height: calc(100dvh - 64px);
+
+    padding: 0;
+
+    border: 0;
+
+    background: rgb(0 0 0 / 10%);
+
+    backdrop-filter: blur(1px);
+
+    cursor: default;
+
+    animation: mobileBackdropOpen 160ms ease-out;
+  }
+
+  /* =======================================================
+     MENU FLUTUANTE
+  ======================================================= */
+
   .mobileNav {
+    position: absolute;
+
+    z-index: 110;
+
+    top: calc(100% + 6px);
+    right: 10px;
+
     display: flex;
+
+    width: 250px;
+    max-width: calc(100vw - 20px);
 
     flex-direction: column;
 
-    gap: 0;
+    gap: 2px;
 
-    border-top: 1px solid #dce5ed;
+    padding: 8px;
 
-    padding: 8px 16px 14px;
+    border: 1px solid #dce5ed;
+    border-radius: 14px;
+
+    background: rgb(255 255 255 / 98%);
+
+    box-shadow:
+      0 18px 42px rgb(15 23 42 / 16%),
+      0 3px 10px rgb(15 23 42 / 7%);
+
+    backdrop-filter: blur(18px);
+
+    transform-origin: top right;
+
+    animation: mobileMenuOpen 170ms ease-out;
   }
 
-  .mobileNav a {
-    position: relative;
+  .mobileNav > a {
+    display: flex;
 
-    padding: 12px;
+    min-height: 40px;
 
-    border-radius: 8px;
+    align-items: center;
 
-    color: inherit;
+    gap: 9px;
 
-    font-size: 14px;
-    font-weight: 600;
+    padding: 0 12px;
+
+    border-radius: 9px;
+
+    color: #344054;
+
+    font-size: 13px;
+    font-weight: 650;
 
     text-decoration: none;
 
     transition:
-      color 150ms ease,
+      transform 150ms ease,
       background-color 150ms ease,
-      padding-left 150ms ease;
+      color 150ms ease;
   }
 
-  .mobileNav a:hover {
-    padding-left: 16px;
-
+  .mobileNav > a:hover {
     background: rgb(22 163 106 / 7%);
 
     color: #16a36a;
   }
+
+  .mobileNav > a:active {
+    transform: scale(0.98);
+  }
+
+  .mobileNavDivider {
+    height: 1px;
+
+    margin: 5px 4px;
+
+    background: #e3eaf0;
+  }
+
+  /* =======================================================
+     PAINEL
+  ======================================================= */
+
+  .mobilePanelLink {
+    border: 1px solid #dce5ed;
+
+    background: #f8fafc;
+  }
+
+  .mobilePanelLink:hover {
+    border-color: #1677c8;
+
+    background: rgb(22 119 200 / 6%) !important;
+
+    color: #1677c8 !important;
+  }
+
+  /* =======================================================
+     ENTRAR
+  ======================================================= */
+
+  .mobileLoginLink {
+    margin-top: 2px;
+
+    border: 1px solid #1677c8;
+
+    background: #123b5d;
+
+    color: #ffffff !important;
+  }
+
+  .mobileLoginLink:hover {
+    border-color: #1677c8;
+
+    background: #1677c8 !important;
+
+    color: #ffffff !important;
+
+    box-shadow:
+      0 7px 18px rgb(22 119 200 / 18%);
+  }
+
+  /* =======================================================
+     FOOTER MOBILE
+  ======================================================= */
 
   .footerInner {
     width: calc(100% - 28px);
@@ -652,5 +817,125 @@
     gap: 7px;
 
     font-size: 10px;
+  }
+}
+
+/* =========================================================
+   MOBILE DARK
+========================================================= */
+
+@media (max-width: 760px) {
+  :global(html[data-theme="dark"]) .mobileBackdrop {
+    background: rgb(0 0 0 / 18%);
+  }
+
+  :global(html[data-theme="dark"]) .mobileNav {
+    border-color: #274459;
+
+    background: rgb(8 27 41 / 98%);
+
+    box-shadow:
+      0 20px 46px rgb(0 0 0 / 36%),
+      0 3px 12px rgb(0 0 0 / 18%);
+  }
+
+  :global(html[data-theme="dark"]) .mobileNav > a {
+    color: #e8eff5;
+  }
+
+  :global(html[data-theme="dark"]) .mobileNav > a:hover {
+    background: rgb(34 199 122 / 8%);
+
+    color: #22c77a;
+  }
+
+  :global(html[data-theme="dark"]) .mobileNavDivider {
+    background: #203b50;
+  }
+
+  :global(html[data-theme="dark"]) .mobilePanelLink {
+    border-color: #274459;
+
+    background: #0d2233;
+  }
+
+  :global(html[data-theme="dark"]) .mobilePanelLink:hover {
+    border-color: #2693ff;
+
+    background: rgb(38 147 255 / 8%) !important;
+
+    color: #69b9ff !important;
+  }
+
+  :global(html[data-theme="dark"]) .mobileLoginLink {
+    border-color: #1677c8;
+
+    background: #123b5d;
+
+    color: #ffffff !important;
+  }
+
+  :global(html[data-theme="dark"]) .mobileLoginLink:hover {
+    border-color: #2693ff;
+
+    background: #1677c8 !important;
+
+    color: #ffffff !important;
+  }
+}
+
+/* =========================================================
+   ANIMAÇÕES
+========================================================= */
+
+@keyframes mobileMenuOpen {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(-5px)
+      translateX(5px)
+      scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      translateX(0)
+      scale(1);
+  }
+}
+
+@keyframes mobileBackdropOpen {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* =========================================================
+   REDUZ ANIMAÇÕES SE O USUÁRIO PREFERIR
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .brandMark,
+  .desktopNav a,
+  .iconButton,
+  .mobileMenuButton,
+  .panelButton,
+  .loginButton,
+  .footerSocials a,
+  .footerColumn a,
+  .mobileNav,
+  .mobileNav > a,
+  .mobileBackdrop {
+    animation: none;
+
+    transition: none;
   }
 }

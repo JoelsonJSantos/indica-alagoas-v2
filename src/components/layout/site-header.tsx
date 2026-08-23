@@ -16,8 +16,11 @@ import { ThemeToggle } from "./theme-toggle";
 import styles from "./site-shell.module.css";
 
 export function SiteHeader() {
-  const [open, setOpen] =
-    useState(false);
+  const [open, setOpen] = useState(false);
+
+  function closeMenu() {
+    setOpen(false);
+  }
 
   return (
     <header className={styles.header}>
@@ -25,6 +28,7 @@ export function SiteHeader() {
         <Link
           href="/"
           className={styles.brand}
+          onClick={closeMenu}
         >
           <span className={styles.brandMark}>
             <MapPin size={23} />
@@ -32,25 +36,26 @@ export function SiteHeader() {
 
           <span>
             <strong>
-              Indica
-              <em>Alagoas</em>
+              Indica<em>Alagoas</em>
             </strong>
 
             <small>
-              Profissionais e serviços
-              perto de você
+              Profissionais e serviços perto de você
             </small>
           </span>
         </Link>
 
         <nav className={styles.desktopNav}>
           <Link href="/">Início</Link>
+
           <Link href="/buscar">
             Buscar
           </Link>
+
           <Link href="/categorias">
             Categorias
           </Link>
+
           <Link href="/como-funciona">
             Como funciona
           </Link>
@@ -78,10 +83,13 @@ export function SiteHeader() {
           <button
             type="button"
             className={styles.mobileMenuButton}
-            onClick={() =>
-              setOpen((value) => !value)
+            onClick={() => setOpen((value) => !value)}
+            aria-label={
+              open
+                ? "Fechar menu"
+                : "Abrir menu"
             }
-            aria-label="Abrir menu"
+            aria-expanded={open}
           >
             {open ? (
               <X size={21} />
@@ -93,24 +101,64 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <nav className={styles.mobileNav}>
-          <Link href="/">Início</Link>
-          <Link href="/buscar">
-            Buscar
-          </Link>
-          <Link href="/categorias">
-            Categorias
-          </Link>
-          <Link href="/como-funciona">
-            Como funciona
-          </Link>
-          <Link href="/painel">
-            Painel
-          </Link>
-          <Link href="/login">
-            Entrar
-          </Link>
-        </nav>
+        <>
+          <button
+            type="button"
+            className={styles.mobileBackdrop}
+            onClick={closeMenu}
+            aria-label="Fechar menu"
+          />
+
+          <nav className={styles.mobileNav}>
+            <Link
+              href="/"
+              onClick={closeMenu}
+            >
+              Início
+            </Link>
+
+            <Link
+              href="/buscar"
+              onClick={closeMenu}
+            >
+              Buscar
+            </Link>
+
+            <Link
+              href="/categorias"
+              onClick={closeMenu}
+            >
+              Categorias
+            </Link>
+
+            <Link
+              href="/como-funciona"
+              onClick={closeMenu}
+            >
+              Como funciona
+            </Link>
+
+            <div className={styles.mobileNavDivider} />
+
+            <Link
+              href="/painel"
+              onClick={closeMenu}
+              className={styles.mobilePanelLink}
+            >
+              <Grid2X2 size={17} />
+              Painel
+            </Link>
+
+            <Link
+              href="/login"
+              onClick={closeMenu}
+              className={styles.mobileLoginLink}
+            >
+              <LogIn size={17} />
+              Entrar
+            </Link>
+          </nav>
+        </>
       )}
     </header>
   );

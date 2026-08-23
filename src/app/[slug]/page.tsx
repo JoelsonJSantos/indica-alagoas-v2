@@ -1,4 +1,6 @@
-import { notFound } from "next/navigation";
+import {
+  notFound,
+} from "next/navigation";
 
 import { FloatingWhatsapp } from "@/components/professional/floating-whatsapp";
 import { ProfessionalAbout } from "@/components/professional/professional-about";
@@ -22,22 +24,37 @@ type ProfessionalPageProps = {
 export default async function ProfessionalPage({
   params,
 }: ProfessionalPageProps) {
-  const { slug } = await params;
+  const { slug } =
+    await params;
 
   const professional =
-    await getProfessionalBySlug(slug);
+    await getProfessionalBySlug(
+      slug,
+    );
 
   if (!professional) {
     notFound();
   }
 
   return (
-    <div className={styles.page}>
-      <main className={styles.container}>
+    <div
+      className={styles.page}
+    >
+      <main
+        className={
+          styles.container
+        }
+      >
         <ProfessionalHero
-          name={professional.name}
-          category={professional.category}
-          location={professional.location}
+          name={
+            professional.name
+          }
+          category={
+            professional.category
+          }
+          location={
+            professional.location
+          }
           description={
             professional.description
           }
@@ -47,7 +64,9 @@ export default async function ProfessionalPage({
           whatsapp={
             professional.whatsapp
           }
-          rating={professional.rating}
+          rating={
+            professional.rating
+          }
           reviewsCount={
             professional.reviewsCount
           }
@@ -65,8 +84,16 @@ export default async function ProfessionalPage({
           }
         />
 
-        <div className={styles.contentGrid}>
-          <div className={styles.mainColumn}>
+        <div
+          className={
+            styles.contentGrid
+          }
+        >
+          <div
+            className={
+              styles.mainColumn
+            }
+          >
             <ProfessionalAbout
               description={
                 professional.about
@@ -80,7 +107,12 @@ export default async function ProfessionalPage({
             />
 
             <ProfessionalReviews
-              rating={professional.rating}
+              professionalSlug={
+                professional.slug
+              }
+              rating={
+                professional.rating
+              }
               reviewsCount={
                 professional.reviewsCount
               }
@@ -90,7 +122,11 @@ export default async function ProfessionalPage({
             />
           </div>
 
-          <aside className={styles.sidebar}>
+          <aside
+            className={
+              styles.sidebar
+            }
+          >
             <ProfessionalInfo
               category={
                 professional.category
@@ -121,7 +157,9 @@ export default async function ProfessionalPage({
       </main>
 
       <FloatingWhatsapp
-        phone={professional.whatsapp}
+        phone={
+          professional.whatsapp
+        }
         professionalName={
           professional.name
         }

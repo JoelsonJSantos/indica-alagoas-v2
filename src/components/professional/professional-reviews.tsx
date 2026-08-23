@@ -11,8 +11,12 @@ import { SectionHeading } from "./section-heading";
 import styles from "./professional-profile.module.css";
 
 type ProfessionalReviewsProps = {
+  professionalSlug: string;
+
   rating: number;
+
   reviewsCount: number;
+
   reviews: ProfessionalReview[];
 };
 
@@ -22,7 +26,9 @@ function Stars({
   rating: number;
 }) {
   return (
-    <div className={styles.stars}>
+    <div
+      className={styles.stars}
+    >
       {Array.from({
         length: 5,
       }).map((_, index) => (
@@ -42,28 +48,46 @@ function Stars({
 }
 
 export function ProfessionalReviews({
+  professionalSlug,
   rating,
   reviewsCount,
   reviews,
 }: ProfessionalReviewsProps) {
   return (
-    <section className={styles.card}>
+    <section
+      className={styles.card}
+    >
       <SectionHeading
         icon={
-          <MessageCircle size={18} />
+          <MessageCircle
+            size={18}
+          />
         }
         title="Avaliações de clientes"
       />
 
-      <div className={styles.reviewsLayout}>
-        <div className={styles.reviewSummary}>
+      <div
+        className={
+          styles.reviewsLayout
+        }
+      >
+        <div
+          className={
+            styles.reviewSummary
+          }
+        >
           <strong>
             {rating
               .toFixed(1)
-              .replace(".", ",")}
+              .replace(
+                ".",
+                ",",
+              )}
           </strong>
 
-          <Stars rating={rating} />
+          <Stars
+            rating={rating}
+          />
 
           <span>
             {reviewsCount}{" "}
@@ -73,74 +97,100 @@ export function ProfessionalReviews({
           </span>
         </div>
 
-        <div className={styles.reviewList}>
-          {reviews.map(
-            (review) => (
-              <article
-                key={review.id}
-                className={
-                  styles.review
-                }
-              >
-                <div
+        <div
+          className={
+            styles.reviewList
+          }
+        >
+          {reviews.length ===
+          0 ? (
+            <p
+              style={{
+                margin: 0,
+
+                color:
+                  "var(--profile-muted)",
+
+                fontSize:
+                  "13px",
+
+                lineHeight:
+                  1.65,
+              }}
+            >
+              Ainda não há
+              avaliações
+              publicadas para
+              este profissional.
+            </p>
+          ) : (
+            reviews.map(
+              (review) => (
+                <article
+                  key={
+                    review.id
+                  }
                   className={
-                    styles.reviewTop
+                    styles.review
                   }
                 >
-                  <span
-                    className={
-                      styles.reviewAvatar
-                    }
-                  >
-                    {review.author
-                      .charAt(0)
-                      .toUpperCase()}
-                  </span>
-
                   <div
                     className={
-                      styles.reviewIdentity
+                      styles.reviewTop
                     }
                   >
-                    <strong>
-                      {review.author}
-                    </strong>
-
-                    <span>
-                      {review.date}
+                    <span
+                      className={
+                        styles.reviewAvatar
+                      }
+                    >
+                      {review.author
+                        .charAt(0)
+                        .toUpperCase()}
                     </span>
+
+                    <div
+                      className={
+                        styles.reviewIdentity
+                      }
+                    >
+                      <strong>
+                        {
+                          review.author
+                        }
+                      </strong>
+
+                      <span>
+                        {
+                          review.date
+                        }
+                      </span>
+                    </div>
+
+                    <Stars
+                      rating={
+                        review.rating
+                      }
+                    />
                   </div>
 
-                  <Stars
-                    rating={
-                      review.rating
+                  <p>
+                    {
+                      review.comment
                     }
-                  />
-                </div>
-
-                <p>
-                  {review.comment}
-                </p>
-              </article>
-            ),
+                  </p>
+                </article>
+              ),
+            )
           )}
-
-          <button
-            type="button"
-            className={
-              styles.outlineActionSmall
-            }
-          >
-            <MessageCircle
-              size={15}
-            />
-
-            Ver todas as avaliações
-          </button>
         </div>
       </div>
 
-      <ProfessionalReviewForm />
+      <ProfessionalReviewForm
+        professionalSlug={
+          professionalSlug
+        }
+      />
     </section>
   );
 }
